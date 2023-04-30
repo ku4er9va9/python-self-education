@@ -1,28 +1,48 @@
-with open("input.txt", "r") as file:
-    contents = file.readlines()
-    str1 = contents[0]
-    str2 = contents[1]
-    print(str1, end="")
-    print(str2)
+def interval_check(value: int) -> str:
+    if 0 <= value <= 100:
+        result = 'Число попало в промежуток от 0-100'
+    elif 200 <= value <= 300:
+        result = 'Число попало в промежуток от 200-300'
+    else:
+        result = 'Не попало ни в один из промежутков'
+    return result
 
-if 0<= int(str2) and int(str2)<=100:
-    print('Число попало в промежуток от 0-100')
-    x = 'Число попало в промежуток от 0-100'
-elif 200<= int(str2) and int(str2)<=300:
-    print('Число попало в промежуток от 200-300')
-    x = 'Число попало в промежуток от 200-300'
-else:
-    print('Не попало ни в один из промежутков')
-    x = 'Не попало ни в один из промежутков'
 
-with open("output.txt", "w") as file:
-        file.write(str1)
+try:
+    with open("input.txt", "r") as file:
+        contents = file.readlines()
+        str1 = contents[0].strip()
+        value = int(contents[1].strip())
+        result = interval_check(value)
+        print('Задача 1.1')
+        print(result+'\n')
 
-with open("output.txt", "a") as file:
-    file.write(str(x)+'\n')
-print(' ')
+    with open("output.txt", "w") as file:
+        file.write(f"{str1}\n{result}\n")
+
+except FileNotFoundError:
+    print("Input file not found!")
+    exit()
+
+except IndexError:
+    print("Input file is empty or doesn't contain two lines!")
+    exit()
+
+except ValueError:
+    print("Invalid input value!")
+    exit()
+
+except Exception as e:
+    print("Error:", e)
+    exit()
+
+
 
 ######################################
+
+def calculate_time(str4: str) -> str:
+    t = (100 - int(str4)) * 2
+    return f"{t} минут"
 
 with open("input.txt", "r") as file:
     contents = file.readlines()
@@ -31,39 +51,33 @@ with open("input.txt", "r") as file:
     print(str3, end="")
     print(str4)
 
-t = (100-int(str4))*2
-print(str(t)+' минут')
-xx = str(t)+' минут'
-
+xx = calculate_time(str4)
 
 with open("output.txt", "a") as file:
-    file.write('\n'+str3)
-    file.write(str4)
-    file.write(xx +'\n')
-
+    file.write(f"{str3}{str4}{xx}\n")
 
 print('')
+
 ########################################
 with open("input.txt", "r") as file:
     contents = file.readlines()
     str5 = contents[4]
-    str6 = contents[5]
-    print(str5, end="")
-    print(str6)
+    str6 = int(contents[5])
 
-
+print(str5, end="")
 
 with open('output.txt', 'a') as f:
     f.write('\n' + str5)
-    for i in range(int(str6)):
-        f.write(f"{i+1}: 000\n")
-        print(f"{i + 1}: 000")
+    for i in range(1, str6+1):
+        line = f"{i}: 000\n"
+        f.write(line)
+        print(line, end='')
+
 
 
 #######################################
 
-print("        ")
-
+print()
 
 with open("input.txt", "r") as file:
     contents = file.readlines()
@@ -74,65 +88,32 @@ with open("input.txt", "r") as file:
 
 height = int(str8)
 
-
 with open('output.txt', 'a') as f:
     f.write('\n' + str7)
     for i in range(1, height + 1):
-        line = "**" * i
+        line = "*" * i
         print(line)
-        f.write(line + '\n')
+        f.write(line)
     f.write('\n')
 
 #############################################
 
-print("    ")
-
 with open("input.txt", "r") as file:
     contents = file.readlines()
     str9 = contents[8]
-    A = contents[9]
-    B = contents[10]
-    C = contents[11]
-    M = contents[12]
-    K = contents[13]
-
-    print(str9, end="")
-    print(A, end="")
-    print(B, end="")
-    print(C, end="")
-    print(M, end="")
-    print(K)
+    A, B, C, M, K = map(int, contents[9:14])
+    print(str9, A, B, C, M, K)
 
 
-if A <= M and B <= K:
-    print("Коробка войдет в дверь")
-    y = "Коробка войдет в дверь"
-elif B <= M and A <= K:
-    print("Коробка войдет в дверь")
-    y = "Коробка войдет в дверь"
-elif A <= M and C <= K:
-    print("Коробка войдет в дверь")
-    y = "Коробка войдет в дверь"
-elif C <= M and A <= K:
-    print("Коробка войдет в дверь")
-    y = "Коробка войдет в дверь"
-elif B <= M and C <= K:
-    print("Коробка войдет в дверь")
-    y = "Коробка войдет в дверь"
-elif C <= M and B <= K:
-    print("Коробка войдет в дверь")
+if (A <= M and B <= K) or (B <= M and A <= K) or (A <= M and C <= K) or (C <= M and A <= K) or (B <= M and C <= K) or (C <= M and B <= K):
     y = "Коробка войдет в дверь"
 else:
-    print("Коробка не войдет в дверь")
     y = "Коробка не войдет в дверь"
+print(y)
+
 
 with open("output.txt", "a") as file:
-    file.write(str9)
-
-with open("output.txt", "a") as file:
-    file.write(str(y) + '\n')
-print(' ')
-
+    file.write(f"{str9}{y}\n")
 
 
 ##################################
@@ -142,106 +123,116 @@ print("       ")
 with open("input.txt", "r") as file:
     contents = file.readlines()
     str15 = contents[14]
-    h = contents[15]
+    h = int(contents[15])
 
-height = int(h)
-
-
-triangle = ''
-for i in range(1, height + 1):
-    triangle += ' ' * (height - i)  # добавление отступов слева
-    triangle += '*' * (2 * i - 1)  # добавление символов "*"
-    triangle += '\n'  # добавление переноса строки
+triangle = '\n'.join([' ' * (h - i) + '*' * (2 * i - 1) for i in range(1, h + 1)])
 
 # Запись треугольника в файл
 with open('output.txt', 'a') as f:
-    f.write('\n'+str15)
-    f.write(triangle)
-    print(str15)
-    print(triangle)
+    f.write('\n' + str15 + '\n' + triangle)
+
+print(str15)
+print(triangle)
 
 
 ################################
-print(" ")
+# импортируем модуль itertools для использования функции takewhile
+import itertools
 
-with open("input.txt", "r") as file:
-    contents = file.readlines()
-    str17 = contents[16]
-    str18 = contents[17]
-    N = int(str18)
-    print(str17, end="")
-    print(N)
+# читаем данные из файла input.txt
+with open("input.txt", "r") as input_file:
+    input_data = input_file.readlines()
+    output_label = input_data[16].strip() # метка для результата
+    n = int(input_data[17].strip()) # верхняя граница для поиска квадратов
 
+# генерируем квадраты чисел до корня из n
+squares = map(str, itertools.takewhile(lambda x: x < n, (i**2 for i in itertools.count(1))))
 
-squares = [i**2 for i in range(1, int(N**0.5)+1)] # создаем последовательность квадратов чисел до корня из N
-result = [str(i) for i in squares if i < N] # выбираем числа меньше N и преобразуем их в строки
-output = "\n".join(result) # соединяем числа в одну строку, разделяя их символом переноса строки
+# соединяем квадраты в одну строку, разделяя их символом переноса строки
+output_data = "\n".join(squares)
 
-with open("output.txt", "a") as file: # открываем файл для записи результата
-    file.write('\n'+str17)
-    file.write(output) # записываем результат в файл
-    file.write('\n')
-print(output) # выводим результат в консоль
+# записываем результат в файл output.txt и выводим его на экран
+with open("output.txt", "a") as output_file:
+    output_file.write(output_label + "\n" + output_data + "\n")
+print(output_label + "\n" + output_data)
 
 
 ##########################
 
 def can_buy_exactly_k_scoops(k):
-    # ищем сумму подмножеств среди чисел 3 и 5
+    # Find the sum of subsets among numbers 3 and 5
     dp = [False] * (k+1)
     dp[0] = True
     for x in [3, 5]:
         for i in range(k, x-1, -1):
             dp[i] |= dp[i-x]
-    # возвращаем результат для k
+    # Return the result for k
     return dp[k]
 
+# Read input from file
 with open("input.txt", "r") as file:
     contents = file.readlines()
-    str19 = contents[18]
-    str20 = contents[19]
-    k = int(str20)
-    print('\n'+str19, end="")
-    print(k)
+    question = contents[18].strip()
+    k = int(contents[19].strip())
 
-result = "да" if can_buy_exactly_k_scoops(k) else "нет" # проверяем, можно ли купить ровно k шариков мороженого
-output = f"Можно ли купить ровно {k} шариков мороженого? {result}" # формируем строку с результатом
-with open("output.txt", "a") as file: # открываем файл для записи результата
-    file.write('\n'+str19)
-    file.write(output) # записываем результат в файл
-print(output) # выводим результат в консоль
+# Check if it's possible to buy exactly k scoops
+can_buy_k_scoops = can_buy_exactly_k_scoops(k)
+result = "да" if can_buy_k_scoops else "нет"
+
+# Format output
+output = f"Можно ли купить ровно {k} шариков мороженого? {result}"
+print(question)
+print(k)
+
+# Write output to file
+with open("output.txt", "a") as file:
+    file.write(f"\n{question}\n")
+    file.write(f"{output}\n")
+
+print(output)
 
 ##################
 
+def calculate_years_to_reach_amount(P, r, Z):
+    A = P
+    years = 0
+    while A < Z:
+        years += 1
+        A *= (1 + r / 100)
+    if years == 0:
+        return "Сумма вклада уже превышает или равна заданной сумме"
+    else:
+        return f"Сумма вклада превысит {Z} тыс. грн через {years} лет"
+
 with open("input.txt", "r") as file:
     contents = file.readlines()
-    str21 = contents[20]
-    str22 = contents[21]
-    str23 = contents[22]
-    str24 = contents[23]
-    P = int(str22)
-    r = int(str23)
-    Z = int(str24)
-    print('\n'+str21, end="")
-    print(P)
-    print(r)
-    print(Z)
+    try:
+        str21 = contents[20]
+        str22 = contents[21]
+        str23 = contents[22]
+        str24 = contents[23]
+        P = int(str22)
+        r = int(str23)
+        Z = int(str24)
+        print('\n' + str21)
+        print(f"Сумма вклада: {P} тыс. грн")
+        print(f"Процентная ставка: {r}%")
+        print(f"Целевая сумма: {Z} тыс. грн")
+        result = calculate_years_to_reach_amount(P, r, Z)
+        with open("output.txt", "a") as file:
+            file.write('\n' + str21)
+            file.write(result)
+            file.write('\n')
+        print(result)
+    except (ValueError, IndexError):
+        print("Ошибка: некорректный формат входных данных")
 
-A = P
-n = 0
-while A < Z:
-    n += 1
-    A *= (1 + r / 100)
-
-result = f"Сумма вклада превысит {Z} тыс. грн через {n} лет"
-print(result)
-
-with open("output.txt", "a") as file:
-    file.write('\n')
-    file.write('\n'+str21)
-    file.write(result)
+file.close()
 
 #################
+
+def digit_sum(n):
+    return sum(map(int, str(n)))
 
 with open("input.txt", "r") as file:
     contents = file.readlines()
@@ -251,9 +242,7 @@ with open("input.txt", "r") as file:
     print('\n'+str25, end="")
     print(NN)
 
-
-digits = [int(d) for d in str(NN)] # преобразуем число в список цифр
-result = sum(digits) # находим сумму цифр
+result = digit_sum(NN) # находим сумму цифр
 output = f"Сумма цифр числа {NN}: {result}" # формируем строку с результатом
 with open("output.txt", "a") as file: # открываем файл для записи результата
     file.write('\n')
