@@ -1,4 +1,4 @@
-with open("input.txt", "r") as file:
+with open("input.txt", "r", encoding='utf-8') as file:
     contents = file.readlines()
     str1 = contents[0]
     str2 = contents[1]
@@ -24,7 +24,7 @@ print(' ')
 
 ######################################
 
-with open("input.txt", "r") as file:
+with open("input.txt", "r", encoding='utf-8') as file:
     contents = file.readlines()
     str3 = contents[2]
     str4 = contents[3]
@@ -44,7 +44,7 @@ with open("output.txt", "a") as file:
 
 print('')
 ########################################
-with open("input.txt", "r") as file:
+with open("input.txt", "r", encoding='utf-8') as file:
     contents = file.readlines()
     str5 = contents[4]
     str6 = contents[5]
@@ -65,7 +65,7 @@ with open('output.txt', 'a') as f:
 print("        ")
 
 
-with open("input.txt", "r") as file:
+with open("input.txt", "r", encoding='utf-8') as file:
     contents = file.readlines()
     str7 = contents[6]
     str8 = contents[7]
